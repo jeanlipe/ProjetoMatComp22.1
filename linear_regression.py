@@ -72,5 +72,5 @@ def simple_linear_regression(dataset):
     coef_b = y_mean - (coef_a * x_mean)
 
     y = coef_a * dataset[dataset_headers[0]] + coef_b
-
-    return y
+    
+    return [y, coef_a, coef_b]

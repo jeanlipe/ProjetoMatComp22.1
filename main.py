@@ -47,9 +47,9 @@ plt.scatter(x = retorno_diario['BOVA11.SA'], y = retorno_diario[acoes[1]], color
 
 x = retorno_diario['BOVA11.SA']
 
-y = simple_linear_regression(retorno_diario)
+regressao_linear = simple_linear_regression(retorno_diario)
 
-plt.plot(x, y, label = 'Reta de Regressão Linear - CAPM')
+plt.plot(x, regressao_linear[0], label = 'Reta de Regressão Linear - CAPM')
 plt.title('Regressão Linear Simples - Modelo CAPM')
 plt.xlabel('BOVA11.SA')
 plt.ylabel(acoes[1])
@@ -61,10 +61,14 @@ plt.show()
 Rm = retorno_diario['BOVA11.SA'].mean() * 252
 
 #Taxa Selic Média
-Taxa_selic_historico = np.array([2.75,2.74,5.95,6.50])
-Rf = Taxa_selic_historico.mean() / 100
+taxa_selic_historico = [2.75, 2.74, 5.95, 6.50]
+
+media_selic = sum(taxa_selic_historico) / len(taxa_selic_historico)
+
+Rf = media_selic / 100
 
 #Modelo CAPM para MGLU
+Beta = regressao_linear[1]
 CAPM_MGLU = Rf + (Beta * (Rm - Rf))
 
 print(CAPM_MGLU)
